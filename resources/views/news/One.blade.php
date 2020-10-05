@@ -13,9 +13,9 @@
                 <div class="card">
                     <div class="card-body">
                         @if ($news)
-                            @if (!$news['isPrivate'])
-                                <h2>{{ $news['title'] }}</h2>
-                                <p>{{ $news['text'] }}</p>
+                            @if (!$news->isPrivate)
+                                <h2>{{ $news->title }}</h2>
+                                <p>{{ $news->text }}</p>
                             @else
                                 Зарегистрируйтесь для просмотра
                             @endif

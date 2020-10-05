@@ -22,7 +22,7 @@ Route::group([
     'as' => 'admin.'
 ], function() {
     Route::get('/', 'IndexController@index')->name('index');
-    Route::match(['get','post'],'/create', 'CreateController@create')->name('create');
+    Route::match(['get','post'],'/create', 'NewsController@create')->name('create');
     Route::get('/test3', 'DownloadController@test2')->name('test2');
 });
 

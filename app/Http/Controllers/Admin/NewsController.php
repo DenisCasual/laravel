@@ -6,7 +6,7 @@ use App\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class CreateController extends Controller
+class NewsController extends Controller
 {
     public function create(Request $request) {
 
