@@ -12,6 +12,7 @@
 */
 
 Route::get('/', 'HomeController@index')->name('home');
+
 Route::view('/about', 'about')->name('about');
 Route::view('/vue', 'vue')->name('vue');
 
@@ -21,8 +22,8 @@ Route::group([
     'as' => 'admin.'
 ], function() {
     Route::get('/', 'IndexController@index')->name('index');
-    Route::get('/test1', 'IndexController@test1')->name('addnews');
-    Route::get('/test2', 'IndexController@test2')->name('test2');
+    Route::match(['get','post'],'/create', 'CreateController@create')->name('create');
+    Route::get('/test3', 'DownloadController@test2')->name('test2');
 });
 
 Route::group([
@@ -45,11 +46,5 @@ Route::group([
 
 
 Auth::routes();
-Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
-Route::post('login', 'Auth\LoginController@login');
-Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
 
-
-
-Route::get('/home', 'HomeController@index')->name('home');

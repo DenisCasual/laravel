@@ -35,6 +35,7 @@ class News
         ],
     ];
 
+
     public static function getNewsByCategorySlug($slug) {
         $id = Category::getCategoryIdBySlug($slug);
         $news = [];

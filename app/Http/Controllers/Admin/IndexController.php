@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\News;
 
 class IndexController extends Controller
 {
@@ -11,11 +13,7 @@ class IndexController extends Controller
         return view('admin.index');
     }
 
-    public function test1() {
-        return view('admin.addnews');
-    }
 
-    public function test2() {
-        return view('admin.test2');
-    }
+
+
 }
