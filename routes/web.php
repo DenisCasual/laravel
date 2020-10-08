@@ -21,9 +21,15 @@ Route::group([
     'namespace' => 'Admin',
     'as' => 'admin.'
 ], function() {
-    Route::get('/', 'IndexController@index')->name('index');
-    Route::match(['get','post'],'/create', 'CreateController@create')->name('create');
-    Route::get('/test3', 'DownloadController@test2')->name('test2');
+    Route::get('/', 'NewsController@index')->name('index');
+    Route::match(['get','post'],'/create', 'NewsController@create')->name('create');
+    Route::get('/edit/{news}', 'NewsController@edit')->name('edit');
+    Route::post('/update/{news}', 'NewsController@update')->name('update');
+    Route::get('/destroy/{news}', 'NewsController@destroy')->name('destroy');
+
+   // Route::resource('news', 'NewsController');
+
+    Route::get('/test3', 'IndexController@test2')->name('test2');
 });
 
 Route::group([
@@ -38,9 +44,10 @@ Route::group([
     });
 
     Route::get('/', 'NewsController@index')->name('index');
-    Route::get('/one/{id}', 'NewsController@show')->name('show');
+    Route::get('/one/{news}', 'NewsController@show')->name('show');
 });
-
+    Route::resource('notes', 'NotesController');
+    Route::get('/note', 'NotesController@index')->name('notes');
 
 
 

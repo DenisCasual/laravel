@@ -12,7 +12,15 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <h2>Админка главная</h2>
+                        <h2>CRUD Новости</h2>
+                        @forelse($news as $item)
+                            <h3>{{ $item->title }}</h3>
+                            <a class="btn btn-success" href="{{ route('admin.edit', $item) }}">Edit</a>
+                            <a class="btn btn-danger" href="{{ route('admin.destroy', $item) }}">Destroy</a>
+                        @empty
+                        Нет новостей
+                        @endforelse
+                        {{ $news->links() }}
                     </div>
                 </div>
             </div>

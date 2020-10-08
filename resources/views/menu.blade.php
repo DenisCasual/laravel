@@ -21,3 +21,6 @@
 <li class="nav-item {{ request()->routeIs('vue')?'active':'' }}">
     <a class="nav-link" href="{{ route('vue') }}">VUE Demo</a>
 </li>
+<li class="nav-item {{ request()->routeIs('notes')?'active':'' }}">
+    <a class="nav-link" href="{{ route('notes.index') }}">Отзывы</a>
+</li>
