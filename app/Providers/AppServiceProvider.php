@@ -3,7 +3,6 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\Schema;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -24,6 +23,18 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Schema::defaultStringLength(191);
+
+        $this->app->singleton(\Faker\Generator::class, function () {
+            return \Faker\Factory::create('ru_RU');
+        });
+
+        /*
+        \Validator::extend('ember', function($attribute, $value, $parameters, $validator) {
+            //dd($attribute, $value, $parameters, $validator);
+
+            return false;
+
+        });
+        */
     }
 }

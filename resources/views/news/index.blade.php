@@ -15,6 +15,7 @@
                         <h1>Новости</h1>
                         @forelse($news as $item)
                             <h2>{{ $item->title }}</h2>
+                            <div class="card-img" style="background-image: url({{$item->image ?? asset('storage/default.jpeg')}})"></div>
                             @if (!$item->isPrivate)
                                 <a href="{{ route('news.show', $item->id) }}">Подробнее...</a><br>
                             @endif
@@ -22,6 +23,7 @@
                         @empty
                             <p>Нет новостей</p>
                         @endforelse
+                        {{ $news->links() }}
                     </div>
                 </div>
             </div>

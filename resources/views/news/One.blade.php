@@ -12,6 +12,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
+                        <div class="card-img" style="background-image: url({{$news->image ?? asset('storage/default.jpeg')}})"></div>
                         @if ($news)
                             @if (!$news->isPrivate)
                                 <h2>{{ $news->title }}</h2>
