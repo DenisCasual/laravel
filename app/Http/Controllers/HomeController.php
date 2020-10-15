@@ -11,4 +11,14 @@ class HomeController extends Controller
     {
         return view('index');
     }
+
+    public function ajax()
+    {
+
+        return response()->json([
+            'text' => 'response'
+        ]);
+    }
+
+
 }

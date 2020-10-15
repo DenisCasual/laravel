@@ -12,17 +12,22 @@
 */
 
 Route::get('/', 'HomeController@index')->name('home');
+
 Route::view('/about', 'about')->name('about');
 Route::view('/vue', 'vue')->name('vue');
+Route::view('/ajax', 'ajax')->name('ajax');
+Route::post('/toggle', 'HomeController@ajax');
 
 Route::group([
     'prefix' => 'admin',
     'namespace' => 'Admin',
-    'as' => 'admin.'
+    'as' => 'admin.',
+    'middleware' => ['auth', 'is_admin']
 ], function() {
-    Route::get('/', 'IndexController@index')->name('index');
-    Route::get('/test1', 'IndexController@test1')->name('addnews');
-    Route::get('/test2', 'IndexController@test2')->name('test2');
+    Route::match(['get','post'], '/profile', 'ProfileController@update')->name('updateProfile');
+    Route::resource('/news', 'NewsController')->except(['show']);
+    Route::get('/test3', 'IndexController@test2')->name('test2');
+    Route::match(['get','post'], '/editUsers', 'EditUsersController@edit')->name('editUsers');
 });
 
 Route::group([
@@ -37,19 +42,11 @@ Route::group([
     });
 
     Route::get('/', 'NewsController@index')->name('index');
-    Route::get('/one/{id}', 'NewsController@show')->name('show');
+    Route::get('/one/{news}', 'NewsController@show')->name('show');
 });
 
 
 
-
-
 Auth::routes();
-Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
-Route::post('login', 'Auth\LoginController@login');
-Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
 
-
-
-Route::get('/home', 'HomeController@index')->name('home');
