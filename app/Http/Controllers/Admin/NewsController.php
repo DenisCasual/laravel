@@ -21,36 +21,33 @@ class NewsController extends Controller
         return view('admin.index')->with('news', $news);
     }
 
-    public function create(Request $request) {
 
-        if ($request->isMethod('post')) {
+    public function store(Request $request) {
 
+        $url = null;
+        // dd($request->image);
+        if ($request->file('image')) {
+            $path = Storage::putFile('public', $request->file('image'));
+            $url = Storage::url($path);
 
-            $url = null;
-            // dd($request->image);
-            if ($request->file('image')) {
-                $path = Storage::putFile('public', $request->file('image'));
-                $url = Storage::url($path);
-
-            }
-
-            $this->validate($request, News::rules(), [], News::attributeNames());
-
-
-
-
-            $news = new News();
-            $news->image = $url;
-
-
-            $news->fill($request->except('image'))->save();
-
-
-
-            return redirect()->route('news.show', $news->id)->with('success', 'Новость добавлена!');
         }
 
+        $this->validate($request, News::rules(), [], News::attributeNames());
 
+
+
+
+        $news = new News();
+        $news->image = $url;
+
+        $news->fill($request->except('image'))->save();
+
+
+
+        return redirect()->route('news.show', $news->id)->with('success', 'Новость добавлена!');
+    }
+
+    public function create() {
 
         return view('admin.create', [
             'categories' => Category::all(),
@@ -60,7 +57,7 @@ class NewsController extends Controller
 
     public function destroy(News $news) {
         $news->delete();
-        return redirect()->route('admin.index')->with('success', 'Новость успешно удалена');
+        return redirect()->route('admin.news.index')->with('success', 'Новость успешно удалена');
     }
 
     public function edit(News $news) {
@@ -70,7 +67,6 @@ class NewsController extends Controller
         ]);
     }
 
-
     public function update(Request $request, News $news) {
         $url = null;
         // dd($request->image);
@@ -79,6 +75,7 @@ class NewsController extends Controller
             $url = Storage::url($path);
 
         }
+        $this->validate($request, News::rules(), [], News::attributeNames());
 
         $news->image = $url;
 

@@ -15,10 +15,10 @@
                     <div class="card-body">
 
                         <form method="POST"
-                              action="@if (!$news->id){{ route('admin.create') }}@else{{ route('admin.update', $news) }}@endif"
+                              action="@if (!$news->id){{ route('admin.news.store') }}@else{{ route('admin.news.update', $news) }}@endif"
                               enctype="multipart/form-data">
                             @csrf
-
+                            @if ($news->id) @method('PUT') @endif
                             <div class="form-group">
                                 <label for="newsTitle">Заголовок новости</label>
                                 @if($errors->has('title'))
@@ -89,13 +89,6 @@
                                        @endif id="newsPrivate" name="isPrivate" type="checkbox" value="1"
                                        class="form-check-input">
                                 <label for="newsPrivate">Приватная</label>
-                                @if ($errors->has('isPrivate'))
-                                    <div class="alert alert-danger" role="alert">
-                                        @foreach($errors->get('isPrivate') as $error)
-                                            <p>{{ $error }}</p>
-                                        @endforeach
-                                    </div>
-                                @endif
 
                             </div>
 

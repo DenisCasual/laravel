@@ -15,21 +15,19 @@ Route::get('/', 'HomeController@index')->name('home');
 
 Route::view('/about', 'about')->name('about');
 Route::view('/vue', 'vue')->name('vue');
+Route::view('/ajax', 'ajax')->name('ajax');
+Route::post('/toggle', 'HomeController@ajax');
 
 Route::group([
     'prefix' => 'admin',
     'namespace' => 'Admin',
-    'as' => 'admin.'
+    'as' => 'admin.',
+    'middleware' => ['auth', 'is_admin']
 ], function() {
-    Route::get('/', 'NewsController@index')->name('index');
-    Route::match(['get','post'],'/create', 'NewsController@create')->name('create');
-    Route::get('/edit/{news}', 'NewsController@edit')->name('edit');
-    Route::post('/update/{news}', 'NewsController@update')->name('update');
-    Route::get('/destroy/{news}', 'NewsController@destroy')->name('destroy');
-
-   // Route::resource('news', 'NewsController');
-
+    Route::match(['get','post'], '/profile', 'ProfileController@update')->name('updateProfile');
+    Route::resource('/news', 'NewsController')->except(['show']);
     Route::get('/test3', 'IndexController@test2')->name('test2');
+    Route::match(['get','post'], '/editUsers', 'EditUsersController@edit')->name('editUsers');
 });
 
 Route::group([
@@ -46,8 +44,6 @@ Route::group([
     Route::get('/', 'NewsController@index')->name('index');
     Route::get('/one/{news}', 'NewsController@show')->name('show');
 });
-
-
 
 
 
