@@ -1,4 +1,20 @@
-<a href="{{ route('home') }}">Главная сайт</a>
-<a href="{{ route('admin.addnews') }}">Добавление новости</a>
-<a href="{{ route('admin.test2') }}">test2</a>
+<li class="nav-item">
+    <a class="nav-link" href="{{ route('home') }}">Главная Сайт</a>
+</li>
+
+<li class="nav-item">
+    <a class="nav-link" href="{{ route('admin.news.create') }}">Добавить новость</a>
+</li>
+
+<li class="nav-item">
+    <a class="nav-link" href="{{ route('admin.test2') }}">download</a>
+</li>
+
+<li class="nav-item">
+    <a class="nav-link" href="{{ route('admin.updateUser') }}">Пользователи</a>
+</li>
+
+<li class="nav-item">
+    <a class="nav-link" href="{{ route('admin.parser') }}">Парсер</a>
+</li>
 

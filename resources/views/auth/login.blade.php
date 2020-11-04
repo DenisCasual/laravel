@@ -1,7 +1,17 @@
-@extends('layouts.app')
-@section('menu')
+
+@extends('layouts.main')
+
+@section('title')
+    @parent Логин
+@endsection
+@section ('menu')
     @include('menu')
+
+@endsection
+
+
 @section('content')
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -49,6 +59,10 @@
                                         {{ __('Remember Me') }}
                                     </label>
                                 </div>
+
+                                <a href="{{ route('vklogin') }}"><img src="vk.png" alt="" width="40"></a>
+                                <a href="{{ route('auth.social', 'facebook') }}"><img src="FaceBook.png" alt="" width="40"></a>
+                                </a>
                             </div>
                         </div>
 
@@ -63,6 +77,7 @@
                                         {{ __('Forgot Your Password?') }}
                                     </a>
                                 @endif
+
                             </div>
                         </div>
                     </form>
@@ -71,4 +86,5 @@
         </div>
     </div>
 </div>
+@endsection
 

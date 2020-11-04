@@ -12,17 +12,27 @@
 */
 
 Route::get('/', 'HomeController@index')->name('home');
+
 Route::view('/about', 'about')->name('about');
 Route::view('/vue', 'vue')->name('vue');
+Route::view('/ajax', 'ajax')->name('ajax');
+Route::post('/toggle', 'HomeController@ajax');
+Route::get('/auth/vk', 'LoginController@loginVK')->name('vklogin');
+Route::get('/auth/vk/response', 'LoginController@responseVK')->name('vkResponse');
+
+Route::match(['get','post'], '/profile', 'ProfileController@update')->name('updateProfile');
 
 Route::group([
     'prefix' => 'admin',
     'namespace' => 'Admin',
-    'as' => 'admin.'
+    'as' => 'admin.',
+    'middleware' => ['auth', 'is_admin']
 ], function() {
-    Route::get('/', 'IndexController@index')->name('index');
-    Route::get('/test1', 'IndexController@test1')->name('addnews');
-    Route::get('/test2', 'IndexController@test2')->name('test2');
+    Route::resource('/news', 'NewsController')->except(['show']);
+    Route::get('/test3', 'IndexController@test2')->name('test2');
+    Route::get('/users', 'UserController@index')->name('updateUser');
+    Route::get('/users/toggleAdmin/{user}', 'UserController@toggleAdmin')->name('toggleAdmin');
+    Route::get('/parser', 'ParserController@index')->name('parser');
 });
 
 Route::group([
@@ -37,19 +47,18 @@ Route::group([
     });
 
     Route::get('/', 'NewsController@index')->name('index');
-    Route::get('/one/{id}', 'NewsController@show')->name('show');
+    Route::get('/one/{news}', 'NewsController@show')->name('show');
 });
 
-
-
-
+Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth', 'is_admin']], function () {
+    \UniSharp\LaravelFilemanager\Lfm::routes();
+});
 
 Auth::routes();
-Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
-Route::post('login', 'Auth\LoginController@login');
-Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+
+Route::get('/social-auth/{provider}', 'Auth\SocialController@redirectToProvider')->name('auth.social');
+
+Route::get('/social-auth/{provider}/callback', 'Auth\SocialController@handleProviderCallback')->name('auth.social.callback');
 
 
 
-
-Route::get('/home', 'HomeController@index')->name('home');
