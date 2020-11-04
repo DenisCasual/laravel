@@ -61,7 +61,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="newsText">Текст новости</label>
+                                <label for="textEdit">Текст новости</label>
                                 @if ($errors->has('text'))
                                     <div class="alert alert-danger" role="alert">
                                         @foreach ($errors->get('text') as $error)
@@ -69,7 +69,7 @@
                                         @endforeach
                                     </div>
                                 @endif
-                                <textarea name="text" id="newsText"
+                                <textarea name="text" id="textEdit"
                                           class="form-control">{{ old('text') ?? $news->text}}</textarea>
                             </div>
 
@@ -98,7 +98,18 @@
                                        value="@if ($news->id)Изменить @else Добавить @endif">
                             </div>
                         </form>
-
+                        <script src="//cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
+                        <script>
+                            var options = {
+                                filebrowserImageBrowseUrl: '/laravel-filemanager?type=Images',
+                                filebrowserImageUploadUrl: '/laravel-filemanager/upload?type=Images&_token=',
+                                filebrowserBrowseUrl: '/laravel-filemanager?type=Files',
+                                filebrowserUploadUrl: '/laravel-filemanager/upload?type=Files&_token='
+                            };
+                        </script>
+                        <script>
+                            CKEDITOR.replace('textEdit', options);
+                        </script>
                     </div>
                 </div>
             </div>

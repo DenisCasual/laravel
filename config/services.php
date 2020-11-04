@@ -14,6 +14,12 @@ return [
     |
     */
 
+    'vkontakte' => [
+        'client_id' => env('VKONTAKTE_CLIENT_ID'),
+        'client_secret' => env('VKONTAKTE_CLIENT_SECRET'),
+        'redirect' => env('VKONTAKTE_REDIRECT_URI')
+    ],
+
     'mailgun' => [
         'domain' => env('MAILGUN_DOMAIN'),
         'secret' => env('MAILGUN_SECRET'),
@@ -33,5 +39,11 @@ return [
     'sparkpost' => [
         'secret' => env('SPARKPOST_SECRET'),
     ],
+
+    'facebook' => [
+       'client_id' => '1032709790523538',
+        'client_secret' => '38e8ca03090f73215b5bac529a6121eb',
+        'redirect' => '/social-auth/facebook/callback',
+   ],
 
 ];
