@@ -1,6 +1,13 @@
-@extends('layouts.app')
-@section('menu')
+@extends('layouts.main')
+
+@section('title')
+    @parent Логин
+@endsection
+
+@section ('menu')
     @include('menu')
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
